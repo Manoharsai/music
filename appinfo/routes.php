@@ -36,3 +36,12 @@ $this->create('media_index', '/')->get()->action(
 		App::main('PageController', 'index', $params, new DIContainer());
 	}
 );
+
+/**
+ * Version api
+ */
+$this->create('media_version', '/version')->get()->action(
+	function($params){
+		App::main('PageController', 'version', $params, new DIContainer());
+	}
+);

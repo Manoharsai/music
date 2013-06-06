@@ -24,12 +24,13 @@
 
 namespace OCA\Media\Controller;
 
+use \OCA\AppFramework\Controller\Controller as BaseController;
 use \OCA\AppFramework\Core\API;
 use \OCA\AppFramework\Http\Request;
-use \OCA\AppFramework\Middleware\Http\HttpException;
+use \OCA\AppFramework\Http\JSONResponse;
 
 
-class PageController extends Controller {
+class Controller extends BaseController {
 
 
 	public function __construct(API $api, Request $request){
@@ -38,26 +39,15 @@ class PageController extends Controller {
 
 
 	/**
-	 * ATTENTION!!!
-	 * The following comment turns off security checks
-	 * Please look up their meaning in the documentation!
-	 *
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @CSRFExemption
+	 * Shortcut for rendering a JSON response with just the data
+	 * @param array $data the PHP array that will be converted to JSON
+	 * empty by default
+	 * @return \OCA\AppFramework\Http\PlainJSONResponse containing the values
 	 */
-	public function index() {
-		return $this->render('main');
-	}
+	public function renderPlainJSON(array $data=array()){
+		$response = new JSONResponse();
+		$response->setData($data);
 
-	/**
-	 * @CSRFExemption
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
-	 */
-	public function version() {
-		throw new HttpException(404, 'Not found2');
-		return $this->renderPlainJSON(Array('main' => 'main'));
+		return $response;
 	}
 }
