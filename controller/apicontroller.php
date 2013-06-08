@@ -22,20 +22,26 @@
  */
 
 
-namespace OCA\Media;
+namespace OCA\Media\Controller;
 
-use \OCA\AppFramework\App;
-use \OCA\Media\DependencyInjection\DIContainer;
+use \OCA\AppFramework\Core\API;
+use \OCA\AppFramework\Http\Request;
 
 
-/**
- * Webinterface
- */
-$this->create('media_index', '/')->get()->action(
-	function($params){
-		App::main('PageController', 'index', $params, new DIContainer());
+class ApiController extends Controller {
+
+
+	public function __construct(API $api, Request $request){
+		parent::__construct($api, $request);
 	}
-);
 
-// include external API
-require_once __DIR__ . '/api.php';
+	/**
+	 * @CSRFExemption
+	 * @IsAdminExemption
+	 * @IsSubAdminExemption
+	 * @Ajax
+	 */
+	public function artists() {
+		return $this->renderPlainJSON(Array('main' => 'main'));
+	}
+}

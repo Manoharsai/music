@@ -26,7 +26,6 @@ namespace OCA\Media\Controller;
 
 use \OCA\AppFramework\Core\API;
 use \OCA\AppFramework\Http\Request;
-use \OCA\AppFramework\Middleware\Http\HttpException;
 
 
 class PageController extends Controller {
@@ -48,16 +47,5 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		return $this->render('main');
-	}
-
-	/**
-	 * @CSRFExemption
-	 * @IsAdminExemption
-	 * @IsSubAdminExemption
-	 * @Ajax
-	 */
-	public function version() {
-		throw new HttpException(404, 'Not found2');
-		return $this->renderPlainJSON(Array('main' => 'main'));
 	}
 }

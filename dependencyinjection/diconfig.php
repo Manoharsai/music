@@ -25,6 +25,7 @@
 
 namespace OCA\Media\DependencyInjection;
 
+use \OCA\Media\Controller\ApiController;
 use \OCA\Media\Controller\PageController;
 use \OCA\Media\Controller\SettingsController;
 
@@ -38,6 +39,10 @@ $this['TwigTemplateDirectory'] = __DIR__ . '/../templates';
 /**
  * CONTROLLERS
  */
+$this['ApiController'] = $this->share(function($c){
+	return new ApiController($c['API'], $c['Request']);
+});
+
 $this['PageController'] = $this->share(function($c){
 	return new PageController($c['API'], $c['Request']);
 });
