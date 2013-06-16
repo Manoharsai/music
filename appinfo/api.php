@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Media app
+ * ownCloud - Music app
  *
  * @author Morris Jobke
  * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
@@ -22,10 +22,10 @@
  */
 
 
-namespace OCA\Media;
+namespace OCA\Music;
 
 use \OCA\AppFramework\App;
-use \OCA\Media\DependencyInjection\DIContainer;
+use \OCA\Music\DependencyInjection\DIContainer;
 
 
 /**
@@ -35,17 +35,17 @@ use \OCA\Media\DependencyInjection\DIContainer;
 /**
  * Artist(s)
  */
-$this->create('media_artists', '/api/artists')->get()->action(
+$this->create('music_artists', '/api/artists')->get()->action(
 	function($params){
 		App::main('ApiController', 'artists', $params, new DIContainer());
 	}
 );
-$this->create('media_artist', '/api/artist/{artistId}')->get()->action(
+$this->create('music_artist', '/api/artist/{artistId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'artist', $params, new DIContainer());
 	}
 );
-/*$this->create('media_artist_shows', '/api/artist/{id}/shows')->get()->action(
+/*$this->create('music_artist_shows', '/api/artist/{id}/shows')->get()->action(
 	function($params){
 		App::main('ApiController', 'artist-shows', $params, new DIContainer());
 	}
@@ -54,12 +54,12 @@ $this->create('media_artist', '/api/artist/{artistId}')->get()->action(
 /**
  * Album(s)
  */
-$this->create('media_albums', '/api/albums')->get()->action(
+$this->create('music_albums', '/api/albums')->get()->action(
 	function($params){
 		App::main('ApiController', 'albums', $params, new DIContainer());
 	}
 );
-$this->create('media_album', '/api/album/{albumId}')->get()->action(
+$this->create('music_album', '/api/album/{albumId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'album', $params, new DIContainer());
 	}
@@ -68,17 +68,17 @@ $this->create('media_album', '/api/album/{albumId}')->get()->action(
 /**
  * Track(s)
  */
-$this->create('media_tracks', '/api/tracks')->get()->action(
+$this->create('music_tracks', '/api/tracks')->get()->action(
 	function($params){
 		App::main('ApiController', 'tracks', $params, new DIContainer());
 	}
 );
-$this->create('media_track', '/api/track/{trackId}')->get()->action(
+$this->create('music_track', '/api/track/{trackId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'track', $params, new DIContainer());
 	}
 );
-/*$this->create('media_track_shows', '/api/track/{id}/shows')->get()->action(
+/*$this->create('music_track_shows', '/api/track/{id}/shows')->get()->action(
 	function($params){
 		App::main('ApiController', 'track-lyrics', $params, new DIContainer());
 	}

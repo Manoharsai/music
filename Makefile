@@ -1,4 +1,4 @@
-app_name=media
+app_name=music
 build_directory=build/
 package_name=$(build_directory)$(app_name)
 

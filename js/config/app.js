@@ -1,6 +1,6 @@
 
 /**
- * ownCloud - Media app
+ * ownCloud - Music app
  *
  * @author Morris Jobke
  * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
@@ -21,7 +21,7 @@
  */
 
 
-angular.module('Media', ['OC']).
+angular.module('Music', ['OC']).
 	config(
 		['$routeProvider', '$interpolateProvider',
 		function ($routeProvider, $interpolateProvider) {

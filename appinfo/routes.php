@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Media app
+ * ownCloud - Music app
  *
  * @author Morris Jobke
  * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
@@ -22,16 +22,16 @@
  */
 
 
-namespace OCA\Media;
+namespace OCA\Music;
 
 use \OCA\AppFramework\App;
-use \OCA\Media\DependencyInjection\DIContainer;
+use \OCA\Music\DependencyInjection\DIContainer;
 
 
 /**
  * Webinterface
  */
-$this->create('media_index', '/')->get()->action(
+$this->create('music_index', '/')->get()->action(
 	function($params){
 		App::main('PageController', 'index', $params, new DIContainer());
 	}

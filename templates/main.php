@@ -5,7 +5,7 @@
 {{ style('style') }}
 
 
-<div id="app" ng-app="Media" ng-cloak>
+<div id="app" ng-app="Music" ng-cloak>
 
 
 <script type="text/ng-template" id="main.html">

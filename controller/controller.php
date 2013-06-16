@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Media app
+ * ownCloud - Music app
  *
  * @author Morris Jobke
  * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
@@ -22,7 +22,7 @@
  */
 
 
-namespace OCA\Media\Controller;
+namespace OCA\Music\Controller;
 
 use \OCA\AppFramework\Controller\Controller as BaseController;
 use \OCA\AppFramework\Core\API;

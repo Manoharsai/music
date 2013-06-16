@@ -6,7 +6,7 @@
 	<charset>utf8</charset>
 
 	<table>
-		<name>*dbprefix*media_artists</name>
+		<name>*dbprefix*music_artists</name>
 		<declaration>
 			<field>
 				<name>id</name>
@@ -35,7 +35,7 @@
 			</field>
 
 			<index>
-				<name>media_artists_user_id_name_index</name>
+				<name>music_artists_user_id_name_index</name>
 				<unique>true</unique>
 				<field>
 					<name>user_id</name>
@@ -48,7 +48,7 @@
 	</table>
 
 	<table>
-		<name>*dbprefix*media_albums</name>
+		<name>*dbprefix*music_albums</name>
 		<declaration>
 			<field>
 				<name>id</name>
@@ -83,7 +83,7 @@
 			</field>
 
 			<index>
-				<name>media_albums_user_id_name_index</name>
+				<name>music_albums_user_id_name_index</name>
 				<unique>true</unique>
 				<field>
 					<name>user_id</name>
@@ -96,7 +96,7 @@
 	</table>
 
 	<table>
-		<name>*dbprefix*media_album_artits</name>
+		<name>*dbprefix*music_album_artits</name>
 		<declaration>
 			<field>
 				<name>user_id</name>
@@ -117,7 +117,7 @@
 			</field>
 
 			<index>
-				<name>media_album_artits_artist_id_album_id_index</name>
+				<name>music_album_artits_artist_id_album_id_index</name>
 				<unique>true</unique>
 				<field>
 					<name>artist_id</name>
@@ -127,13 +127,13 @@
 				</field>
 			</index>
 			<index>
-				<name>media_tracks_album_id_index</name>
+				<name>music_tracks_album_id_index</name>
 				<field>
 					<name>album_id</name>
 				</field>
 			</index>
 			<index>
-				<name>media_trackss_user_id_title_index</name>
+				<name>music_tracks_user_id_title_index</name>
 				<unique>true</unique>
 				<field>
 					<name>user_id</name>
@@ -146,7 +146,7 @@
 	</table>
 
 	<table>
-		<name>*dbprefix*media_tracks</name>
+		<name>*dbprefix*music_tracks</name>
 		<declaration>
 			<field>
 				<name>id</name>
@@ -204,19 +204,19 @@
 			</field>
 
 			<index>
-				<name>media_tracks_artist_id_index</name>
+				<name>music_tracks_artist_id_index</name>
 				<field>
 					<name>artist_id</name>
 				</field>
 			</index>
 			<index>
-				<name>media_tracks_album_id_index</name>
+				<name>music_tracks_album_id_index</name>
 				<field>
 					<name>album_id</name>
 				</field>
 			</index>
 			<index>
-				<name>media_trackss_user_id_title_index</name>
+				<name>music_trackss_user_id_title_index</name>
 				<unique>true</unique>
 				<field>
 					<name>user_id</name>

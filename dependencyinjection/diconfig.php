@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ownCloud - Media app
+ * ownCloud - Music app
  *
  * @author Morris Jobke
  * @copyright 2013 Morris Jobke <morris.jobke@gmail.com>
@@ -23,10 +23,10 @@
 
 
 
-namespace OCA\Media\DependencyInjection;
+namespace OCA\Music\DependencyInjection;
 
-use \OCA\Media\Controller\ApiController;
-use \OCA\Media\Controller\PageController;
+use \OCA\Music\Controller\ApiController;
+use \OCA\Music\Controller\PageController;
 
 /**
  * Delete the following twig config to use ownClouds default templates
