@@ -22,32 +22,36 @@
  */
 
 
-namespace OCA\Media\Controller;
+namespace OCA\Media\Db;
 
-use OCA\AppFramework\Controller\Controller;
-
-
-class SettingsController extends Controller {
+require_once(__DIR__ . "/../../classloader.php");
 
 
-	/**
-	 * @param Request $request: an instance of the request
-	 * @param API $api: an api wrapper instance
-	 */
-	public function __construct($api, $request){
-		parent::__construct($api, $request);
-	}
+class TrackTest extends \PHPUnit_Framework_TestCase {
 
+	public function testToAPI() {
+		$track = new Track();
+		$track->setUserId(3);
+		$track->setTitle('The title');
+		$track->setNumber(4);
+		$track->setArtistId(2);
+		$track->setAlbumId(3);
+		$track->setFileSize(123);
+		$track->setLength(123);
+		$track->setFile('path/to/file.ogg');
+		$track->setBitrate(123);
 
-	/**
-	 * ATTENTION!!!
-	 * The following comment turns off security checks
-	 * Please look up their meaning in the documentation!
-	 *
-	 * @CSRFExemption
-	 */
-	public function index(){
-		return $this->render('admin/settings');
+		$this->assertEquals(array(
+			'userId' => 3,
+			'title' => 'The title',
+			'number' => 4,
+			'artistId' => 2,
+			'albumId' => 3,
+			'fileSize' => 123,
+			'length' => 123,
+			'file' => 'path/to/file.ogg',
+			'bitrate' => 123,
+			), $track->toAPI());
 	}
 
 }

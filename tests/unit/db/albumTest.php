@@ -22,26 +22,28 @@
  */
 
 
+namespace OCA\Media\Db;
 
-namespace OCA\Media\DependencyInjection;
-
-use \OCA\Media\Controller\ApiController;
-use \OCA\Media\Controller\PageController;
-
-/**
- * Delete the following twig config to use ownClouds default templates
- */
-// use this to specify the template directory
-$this['TwigTemplateDirectory'] = __DIR__ . '/../templates';
+require_once(__DIR__ . "/../../classloader.php");
 
 
-/**
- * CONTROLLERS
- */
-$this['ApiController'] = $this->share(function($c){
-	return new ApiController($c['API'], $c['Request']);
-});
+class AlbumTest extends \PHPUnit_Framework_TestCase {
 
-$this['PageController'] = $this->share(function($c){
-	return new PageController($c['API'], $c['Request']);
-});
+	public function testToAPI() {
+		$album = new Album();
+		$album->setUserId(3);
+		$album->setName('The name');
+		$album->setYear(2013);
+		$album->setArtistIds(array(2, 3));
+		$album->setCoverUrl('The url');
+
+		$this->assertEquals(array(
+			'userId' => 3,
+			'name' => 'The name',
+			'year' => 2013,
+			'artistIds' => array(2, 3),
+			'coverUrl' => 'The url'
+			), $album->toAPI());
+	}
+
+}

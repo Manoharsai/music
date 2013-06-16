@@ -22,19 +22,30 @@
  */
 
 
-namespace OCA\Media\Admin;
+namespace OCA\Media\Db;
 
-use OCA\AppFramework\App;
-
-use OCA\Media\DependencyInjection\DIContainer;
+use \OCA\AppFramework\Db\Entity;
 
 
-// we need to fetch the output and return it for the admin page. Dont ask why
-ob_start();
+class Album extends Entity {
 
-App::main('SettingsController', 'index', array(), new DIContainer());
+	public $userId;
+	public $name;
+	public $year;
+	public $artistIds;
+	public $coverUrl;
 
-$content = ob_get_contents();
-ob_clean();
+	public function __construct(){
+		$this->addType('year', 'int');
+	}
 
-return $content;
+	public function toAPI() {
+		return array(
+			'userId' => $this->getUserId(),
+			'name' => $this->getName(),
+			'year' => $this->getYear(),
+			'artistIds' => $this->getArtistIds(),
+			'coverUrl' => $this->getCoverUrl()
+		);
+	}
+}

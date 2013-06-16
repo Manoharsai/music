@@ -35,17 +35,17 @@ use \OCA\Media\DependencyInjection\DIContainer;
 /**
  * Artist(s)
  */
-$this->create('media_version', '/api/artists')->get()->action(
+$this->create('media_artists', '/api/artists')->get()->action(
 	function($params){
 		App::main('ApiController', 'artists', $params, new DIContainer());
 	}
 );
-$this->create('media_version', '/api/artist/{id}')->get()->action(
+$this->create('media_artist', '/api/artist/{artistId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'artist', $params, new DIContainer());
 	}
 );
-/*$this->create('media_version', '/api/artist/{id}/shows')->get()->action(
+/*$this->create('media_artist_shows', '/api/artist/{id}/shows')->get()->action(
 	function($params){
 		App::main('ApiController', 'artist-shows', $params, new DIContainer());
 	}
@@ -54,12 +54,12 @@ $this->create('media_version', '/api/artist/{id}')->get()->action(
 /**
  * Album(s)
  */
-$this->create('media_version', '/api/albums')->get()->action(
+$this->create('media_albums', '/api/albums')->get()->action(
 	function($params){
 		App::main('ApiController', 'albums', $params, new DIContainer());
 	}
 );
-$this->create('media_version', '/api/album/{id}')->get()->action(
+$this->create('media_album', '/api/album/{albumId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'album', $params, new DIContainer());
 	}
@@ -68,17 +68,17 @@ $this->create('media_version', '/api/album/{id}')->get()->action(
 /**
  * Track(s)
  */
-$this->create('media_version', '/api/tracks')->get()->action(
+$this->create('media_tracks', '/api/tracks')->get()->action(
 	function($params){
 		App::main('ApiController', 'tracks', $params, new DIContainer());
 	}
 );
-$this->create('media_version', '/api/track/{id}')->get()->action(
+$this->create('media_track', '/api/track/{trackId}')->get()->action(
 	function($params){
 		App::main('ApiController', 'track', $params, new DIContainer());
 	}
 );
-/*$this->create('media_version', '/api/track/{id}/shows')->get()->action(
+/*$this->create('media_track_shows', '/api/track/{id}/shows')->get()->action(
 	function($params){
 		App::main('ApiController', 'track-lyrics', $params, new DIContainer());
 	}

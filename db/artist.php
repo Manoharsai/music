@@ -22,26 +22,26 @@
  */
 
 
+namespace OCA\Media\Db;
 
-namespace OCA\Media\DependencyInjection;
-
-use \OCA\Media\Controller\ApiController;
-use \OCA\Media\Controller\PageController;
-
-/**
- * Delete the following twig config to use ownClouds default templates
- */
-// use this to specify the template directory
-$this['TwigTemplateDirectory'] = __DIR__ . '/../templates';
+use \OCA\AppFramework\Db\Entity;
 
 
-/**
- * CONTROLLERS
- */
-$this['ApiController'] = $this->share(function($c){
-	return new ApiController($c['API'], $c['Request']);
-});
+class Artist extends Entity {
 
-$this['PageController'] = $this->share(function($c){
-	return new PageController($c['API'], $c['Request']);
-});
+	public $userId;
+	public $name;
+	public $imageUrl;
+
+	public function __construct(){
+		$this->addType('userId', 'int');
+	}
+
+	public function toAPI() {
+		return array(
+			'userId' => $this->getUserId(),
+			'name' => $this->getName(),
+			'imageUrl' => $this->getImageUrl()
+		);
+	}
+}
