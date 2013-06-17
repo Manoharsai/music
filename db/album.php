@@ -29,7 +29,6 @@ use \OCA\AppFramework\Db\Entity;
 
 class Album extends Entity {
 
-	public $userId;
 	public $name;
 	public $year;
 	public $artistIds;

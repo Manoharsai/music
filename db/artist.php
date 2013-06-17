@@ -29,13 +29,8 @@ use \OCA\AppFramework\Db\Entity;
 
 class Artist extends Entity {
 
-	public $userId;
 	public $name;
 	public $image; // URL
-
-	public function __construct(){
-		$this->addType('userId', 'int');
-	}
 
 	public function toAPI() {
 		return array(

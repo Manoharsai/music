@@ -29,7 +29,6 @@ use \OCA\AppFramework\Db\Entity;
 
 class Track extends Entity {
 
-	public $userId;
 	public $title;
 	public $number;
 	public $artistId;

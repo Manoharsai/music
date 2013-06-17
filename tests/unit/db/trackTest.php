@@ -32,7 +32,6 @@ class TrackTest extends \PHPUnit_Framework_TestCase {
 	public function testToAPI() {
 		$track = new Track();
 		$track->setId(1);
-		$track->setUserId(3);
 		$track->setTitle('The title');
 		$track->setNumber(4);
 		$track->setArtistId(2);

@@ -32,7 +32,6 @@ class AlbumTest extends \PHPUnit_Framework_TestCase {
 	public function testToAPI() {
 		$album = new Album();
 		$album->setId(3);
-		$album->setUserId(3);
 		$album->setName('The name');
 		$album->setYear(2013);
 		$album->setCover('The url');
