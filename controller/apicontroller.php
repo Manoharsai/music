@@ -33,30 +33,19 @@ use \OCA\Music\BusinessLayer\TrackBusinessLayer;
 class ApiController extends Controller {
 
 	private $trackBusinessLayer;
+	private $artistBusinessLayer;
 
 	private $dummyArtists = array();
 	private $dummyAlbums = array();
 	private $dummyTracks = array();
 
-	public function __construct(API $api, Request $request, TrackBusinessLayer $trackbusinesslayer){
+	public function __construct(API $api, Request $request,
+		TrackBusinessLayer $trackbusinesslayer, ArtistBusinessLayer $artistbusinesslayer){
 		parent::__construct($api, $request);
 		$this->trackBusinessLayer = $trackbusinesslayer;
+		$this->artistBusinessLayer = $artistbusinesslayer;
 	}
 
-	private function createDummyArtists(){
-		$artist = new Artist();
-		$artist->setId(1);
-		$artist->setUserId(3);
-		$artist->setName('The artist name');
-		$artist->setImage('http://lorempixel.com/200/200/nightlife');
-		$this->dummyArtists[$artist->getId()] = $artist->toApi();
-		$artist = new Artist();
-		$artist->setId(2);
-		$artist->setUserId(3);
-		$artist->setName('The proper artist name');
-		$artist->setImage('http://lorempixel.com/200/200/people');
-		$this->dummyArtists[$artist->getId()] = $artist->toApi();
-	}
 	private function createDummyAlbums(){
 		$album = new Album();
 		$album->setId(1);
@@ -84,8 +73,9 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function artists() {
-		$this->createDummyArtists();
-		return $this->renderPlainJSON(array_values($this->dummyArtists));
+		$userId = $this->api->getUserId();
+		$artists = $this->artistBusinessLayer->findAll($userId);
+		return $this->renderPlainJSON($artists);
 	}
 
 	/**
@@ -95,12 +85,10 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function artist() {
+		$userId = $this->api->getUserId();
 		$artistId = $this->getIdFromSlug($this->params('artistIdOrSlug'));
-		$this->createDummyArtists();
-		if(array_key_exists($artistId, $this->dummyArtists))
-			return $this->renderPlainJSON($this->dummyArtists[$artistId]);
-		else
-			return $this->renderPlainJSON(Array('error' => 'No such artist'));
+		$artist = $this->artistBusinessLayer->find($artistId, $userId);
+		return $this->renderPlainJSON($artist);
 	}
 
 	/**

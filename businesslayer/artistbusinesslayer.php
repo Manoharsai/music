@@ -27,46 +27,26 @@ use \OCA\Music\Db\Track;
 use \OCA\Music\Db\TrackMapper;
 
 
-class TrackBusinessLayer extends BusinessLayer {
+class ArtistBusinessLayer extends BusinessLayer {
 
-	public function __construct(TrackMapper $trackMapper){
-		parent::__construct($trackMapper);
+	public function __construct(ArtistMapper $artistMapper){
+		parent::__construct($artistMapper);
 	}
 
 	/**
-	 * Returns all tracks
+	 * Returns all artists
 	 * @param string $userId the name of the user
-	 * @return array of tracks
+	 * @return array of artists
 	 */
 	public function findAll($userId){
 		return $this->mapper->findAll($userId);
 	}
 
 	/**
-	 * Returns all tracks filtered by artist
-	 * @param string $artistId the id of the artist
+	 * Returns a artist
+	 * @param string $id the id of the artist
 	 * @param string $userId the name of the user
-	 * @return array of tracks
-	 */
-	public function findAllByArtist($artistId, $userId){
-		return $this->mapper->findAllByArtist($artistId, $userId);
-	}
-
-	/**
-	 * Returns all tracks filtered by album
-	 * @param string $albumId the id of the artist
-	 * @param string $userId the name of the user
-	 * @return array of tracks
-	 */
-	public function findAllByAlbum($albumId, $userId){
-		return $this->mapper->findAllByAlbum($albumId, $userId);
-	}
-
-	/**
-	 * Returns a track
-	 * @param string $id the id of the track
-	 * @param string $userId the name of the user
-	 * @return track
+	 * @return artist
 	 */
 	public function find($id, $userId){
 		return $this->mapper->find($id, $userId);

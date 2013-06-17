@@ -1,7 +1,7 @@
 <?php
 
 /**
-* ownCloud - News
+* ownCloud - Music app
 *
 * @author Alessandro Cosentino
 * @author Bernhard Posselt
