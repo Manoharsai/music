@@ -40,7 +40,7 @@ $this->create('music_artists', '/api/artists')->get()->action(
 		App::main('ApiController', 'artists', $params, new DIContainer());
 	}
 );
-$this->create('music_artist', '/api/artist/{artistId}')->get()->action(
+$this->create('music_artist', '/api/artist/{artistIdOrSlug}')->get()->action(
 	function($params){
 		App::main('ApiController', 'artist', $params, new DIContainer());
 	}
@@ -59,7 +59,7 @@ $this->create('music_albums', '/api/albums')->get()->action(
 		App::main('ApiController', 'albums', $params, new DIContainer());
 	}
 );
-$this->create('music_album', '/api/album/{albumId}')->get()->action(
+$this->create('music_album', '/api/album/{albumIdOrSlug}')->get()->action(
 	function($params){
 		App::main('ApiController', 'album', $params, new DIContainer());
 	}
@@ -73,7 +73,7 @@ $this->create('music_tracks', '/api/tracks')->get()->action(
 		App::main('ApiController', 'tracks', $params, new DIContainer());
 	}
 );
-$this->create('music_track', '/api/track/{trackId}')->get()->action(
+$this->create('music_track', '/api/track/{trackIdOrSlug}')->get()->action(
 	function($params){
 		App::main('ApiController', 'track', $params, new DIContainer());
 	}

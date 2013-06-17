@@ -31,18 +31,19 @@ class AlbumTest extends \PHPUnit_Framework_TestCase {
 
 	public function testToAPI() {
 		$album = new Album();
+		$album->setId(3);
 		$album->setUserId(3);
 		$album->setName('The name');
 		$album->setYear(2013);
-		$album->setArtistIds(array(2, 3));
-		$album->setCoverUrl('The url');
+		$album->setCover('The url');
 
 		$this->assertEquals(array(
-			'userId' => 3,
+			'id' => 3,
 			'name' => 'The name',
 			'year' => 2013,
-			'artistIds' => array(2, 3),
-			'coverUrl' => 'The url'
+			'cover' => 'The url',
+			'slug' => '3-the-name',
+			'uri' => ''
 			), $album->toAPI());
 	}
 

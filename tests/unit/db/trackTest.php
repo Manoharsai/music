@@ -31,26 +31,27 @@ class TrackTest extends \PHPUnit_Framework_TestCase {
 
 	public function testToAPI() {
 		$track = new Track();
+		$track->setId(1);
 		$track->setUserId(3);
 		$track->setTitle('The title');
 		$track->setNumber(4);
 		$track->setArtistId(2);
 		$track->setAlbumId(3);
-		$track->setFileSize(123);
 		$track->setLength(123);
 		$track->setFile('path/to/file.ogg');
 		$track->setBitrate(123);
 
 		$this->assertEquals(array(
-			'userId' => 3,
+			'id' => 1,
 			'title' => 'The title',
 			'number' => 4,
 			'artistId' => 2,
 			'albumId' => 3,
-			'fileSize' => 123,
 			'length' => 123,
 			'file' => 'path/to/file.ogg',
 			'bitrate' => 123,
+			'slug' => '1-the-title',
+			'uri' => ''
 			), $track->toAPI());
 	}
 

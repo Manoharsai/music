@@ -50,4 +50,16 @@ class Controller extends BaseController {
 
 		return $response;
 	}
+
+
+	/**
+	 * Extracts the id from an unique slug (id-slug)
+	 * @param string $slug the slug
+	 * @return string the id
+	 */
+	protected function getIdFromSlug($slug){
+		$split = explode('-', $slug, 2);
+
+		return $split[0];
+	}
 }

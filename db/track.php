@@ -34,7 +34,6 @@ class Track extends Entity {
 	public $number;
 	public $artistId;
 	public $albumId;
-	public $fileSize;
 	public $length;
 	public $file;
 	public $bitrate;
@@ -50,15 +49,16 @@ class Track extends Entity {
 
 	public function toAPI() {
 		return array(
-			'userId' => $this->getUserId(),
 			'title' => $this->getTitle(),
 			'number' => $this->getNumber(),
 			'artistId' => $this->getArtistId(),
 			'albumId' => $this->getAlbumId(),
-			'fileSize' => $this->getFileSize(),
 			'length' => $this->getLength(),
 			'file' => $this->getFile(),
-			'bitrate' => $this->getBitrate()
+			'bitrate' => $this->getBitrate(),
+			'id' => $this->getId(),
+			'slug' => $this->getId() . '-' . $this->slugify('title'),
+			'uri' => '' // TODO
 		);
 	}
 }

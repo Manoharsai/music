@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <info>
-	<id>musid</id>
+	<id>music</id>
 	<name>Music</name>
 	<description>Music player and server for ownCloud</description>
 	<licence>AGPLv3</licence>

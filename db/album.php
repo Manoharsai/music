@@ -33,7 +33,7 @@ class Album extends Entity {
 	public $name;
 	public $year;
 	public $artistIds;
-	public $coverUrl;
+	public $cover;
 
 	public function __construct(){
 		$this->addType('year', 'int');
@@ -41,11 +41,12 @@ class Album extends Entity {
 
 	public function toAPI() {
 		return array(
-			'userId' => $this->getUserId(),
 			'name' => $this->getName(),
 			'year' => $this->getYear(),
-			'artistIds' => $this->getArtistIds(),
-			'coverUrl' => $this->getCoverUrl()
+			'cover' => $this->getCover(),
+			'uri' => '', // TODO
+			'slug' => $this->getid() . '-' .$this->slugify('name'),
+			'id' => $this->getId()
 		);
 	}
 }

@@ -96,15 +96,8 @@
 	</table>
 
 	<table>
-		<name>*dbprefix*music_album_artits</name>
+		<name>*dbprefix*music_album_artists</name>
 		<declaration>
-			<field>
-				<name>user_id</name>
-				<type>text</type>
-				<default></default>
-				<notnull>true</notnull>
-				<length>64</length>
-			</field>
 			<field>
 				<name>artist_id</name>
 				<type>integer</type>
@@ -117,29 +110,13 @@
 			</field>
 
 			<index>
-				<name>music_album_artits_artist_id_album_id_index</name>
+				<name>music_album_artists_artist_id_album_id_index</name>
 				<unique>true</unique>
 				<field>
 					<name>artist_id</name>
 				</field>
 				<field>
 					<name>album_id</name>
-				</field>
-			</index>
-			<index>
-				<name>music_tracks_album_id_index</name>
-				<field>
-					<name>album_id</name>
-				</field>
-			</index>
-			<index>
-				<name>music_tracks_user_id_title_index</name>
-				<unique>true</unique>
-				<field>
-					<name>user_id</name>
-				</field>
-				<field>
-					<name>title</name>
 				</field>
 			</index>
 		</declaration>
@@ -191,12 +168,6 @@
 				<unsigned>true</unsigned>
 			</field>
 			<field>
-				<name>filesize</name>
-				<type>integer</type>
-				<notnull>true</notnull>
-				<unsigned>true</unsigned>
-			</field>
-			<field>
 				<name>bitrate</name>
 				<type>integer</type>
 				<notnull>true</notnull>
@@ -216,7 +187,7 @@
 				</field>
 			</index>
 			<index>
-				<name>music_trackss_user_id_title_index</name>
+				<name>music_tracks_user_id_title_index</name>
 				<unique>true</unique>
 				<field>
 					<name>user_id</name>

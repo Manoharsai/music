@@ -31,7 +31,7 @@ class Artist extends Entity {
 
 	public $userId;
 	public $name;
-	public $imageUrl;
+	public $image; // URL
 
 	public function __construct(){
 		$this->addType('userId', 'int');
@@ -39,9 +39,11 @@ class Artist extends Entity {
 
 	public function toAPI() {
 		return array(
-			'userId' => $this->getUserId(),
+			'id' => $this->getId(),
 			'name' => $this->getName(),
-			'imageUrl' => $this->getImageUrl()
+			'image' => $this->getImage(),
+			'slug' => $this->getId() . '-' . $this->slugify('name'),
+			'uri' => '' // TODO
 		);
 	}
 }

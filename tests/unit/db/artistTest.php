@@ -30,16 +30,18 @@ require_once(__DIR__ . "/../../classloader.php");
 class ArtistTest extends \PHPUnit_Framework_TestCase {
 
 	public function testToAPI() {
-		$album = new Artist();
-		$album->setUserId(3);
-		$album->setName('The name');
-		$album->setImageUrl('The url');
+		$artist = new Artist();
+		$artist->setId(3);
+		$artist->setName('The name');
+		$artist->setImage('The image url');
 
 		$this->assertEquals(array(
-			'userId' => 3,
+			'id' => 3,
 			'name' => 'The name',
-			'imageUrl' => 'The url'
-			), $album->toAPI());
+			'image' => 'The image url',
+			'slug' => $artist->getId() . '-the-name',
+			'uri' => ''
+			), $artist->toAPI());
 	}
 
 }
