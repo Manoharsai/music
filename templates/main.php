@@ -18,10 +18,6 @@
 			{% include 'nav.php' %}
 		</ul>
 
-		<div id="app-settings">
-			{% include 'settings.php' %}
-		</div>
-
 	</div>
 
 	<div id="app-content" ng-view></div>
