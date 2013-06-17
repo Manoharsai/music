@@ -27,6 +27,8 @@ namespace OCA\Music\DependencyInjection;
 
 use \OCA\Music\Controller\ApiController;
 use \OCA\Music\Controller\PageController;
+use \OCA\Music\BusinessLayer\TrackBusinessLayer;
+use \OCA\Music\Db\TrackMapper;
 
 /**
  * Delete the following twig config to use ownClouds default templates
@@ -39,9 +41,17 @@ $this['TwigTemplateDirectory'] = __DIR__ . '/../templates';
  * CONTROLLERS
  */
 $this['ApiController'] = $this->share(function($c){
-	return new ApiController($c['API'], $c['Request']);
+	return new ApiController($c['API'], $c['Request'], $c['TrackBusinessLayer']);
 });
 
 $this['PageController'] = $this->share(function($c){
 	return new PageController($c['API'], $c['Request']);
+});
+
+$this['TrackMapper'] = $this->share(function($c){
+	return new TrackMapper($c['API']);
+});
+
+$this['TrackBusinessLayer'] = $this->share(function($c){
+	return new TrackBusinessLayer($c['TrackMapper']);
 });

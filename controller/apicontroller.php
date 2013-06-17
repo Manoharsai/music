@@ -27,16 +27,20 @@ namespace OCA\Music\Controller;
 use \OCA\AppFramework\Core\API;
 use \OCA\AppFramework\Http\Request;
 use \OCA\Music\Db\Artist;
+use \OCA\Music\BusinessLayer\TrackBusinessLayer;
 
 
 class ApiController extends Controller {
+
+	private $trackBusinessLayer;
 
 	private $dummyArtists = array();
 	private $dummyAlbums = array();
 	private $dummyTracks = array();
 
-	public function __construct(API $api, Request $request){
+	public function __construct(API $api, Request $request, TrackBusinessLayer $trackbusinesslayer){
 		parent::__construct($api, $request);
+		$this->trackBusinessLayer = $trackbusinesslayer;
 	}
 
 	private function createDummyArtists(){
@@ -72,41 +76,6 @@ class ApiController extends Controller {
 		$album->setName('The properer album name');
 		$album->setImage('http://lorempixel.com/200/200/people');
 		$this->dummyAlbums[$album->getId()] = $album->toApi();
-	}
-	private function createDummyTracks(){
-		$track = new Track();
-		$track->setId(1);
-		$track->setUserId(3);
-		$track->setTitle('The title');
-		$track->setNumber(4);
-		$track->setArtistId(2);
-		$track->setAlbumId(3);
-		$track->setLength(123);
-		$track->setFile('path/to/file.ogg');
-		$track->setBitrate(123);
-		$this->dummyTracks[$track->getId()] = $track->toApi();
-		$track = new Track();
-		$track->setId(2);
-		$track->setUserId(3);
-		$track->setTitle('The title2');
-		$track->setNumber(56);
-		$track->setArtistId(2);
-		$track->setAlbumId(1);
-		$track->setLength(123);
-		$track->setFile('path/to/file.ogg');
-		$track->setBitrate(123);
-		$this->dummyTracks[$track->getId()] = $track->toApi();
-		$track = new Track();
-		$track->setId(3);
-		$track->setUserId(3);
-		$track->setTitle('The title3');
-		$track->setNumber(4);
-		$track->setArtistId(2);
-		$track->setAlbumId(3);
-		$track->setLength(123);
-		$track->setFile('path/to/file.ogg');
-		$track->setBitrate(123);
-		$this->dummyTracks[$track->getId()] = $track->toApi();
 	}
 	/**
 	 * @CSRFExemption
@@ -167,8 +136,15 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function tracks() {
-		$this->createDummyTracks();
-		return $this->renderPlainJSON(array_values($this->dummyTracks));
+		$userId = $this->api->getUserId();
+		if($artistId = $this->params('artist')) {
+			$tracks = $this->trackBusinessLayer->findAllByArtist($artistId, $userId);
+		} elseif($albumId = $this->params('album')) {
+			$tracks = $this->trackBusinessLayer->findAllByAlbum($albumId, $userId);
+		} else {
+			$tracks = $this->trackBusinessLayer->findAll($userId);
+		}
+		return $this->renderPlainJSON($tracks);
 	}
 
 	/**
@@ -178,11 +154,9 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function track() {
+		$userId = $this->api->getUserId();
 		$trackId = $this->getIdFromSlug($this->params('trackIdOrSlug'));
-		$this->createDummyTracks();
-		if(array_key_exists($trackId, $this->dummyTracks))
-			return $this->renderPlainJSON($this->dummyTracks[$trackId]);
-		else
-			return $this->renderPlainJSON(Array('error' => 'No such track'));
+		$track = $this->trackBusinessLayer->find($trackId, $userId);
+		return $this->renderPlainJSON($track);
 	}
 }
