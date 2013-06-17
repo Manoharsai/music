@@ -29,8 +29,10 @@ use \OCA\Music\Controller\ApiController;
 use \OCA\Music\Controller\PageController;
 use \OCA\Music\BusinessLayer\TrackBusinessLayer;
 use \OCA\Music\BusinessLayer\ArtistBusinessLayer;
+use \OCA\Music\BusinessLayer\AlbumBusinessLayer;
 use \OCA\Music\Db\TrackMapper;
 use \OCA\Music\Db\ArtistMapper;
+use \OCA\Music\Db\AlbumMapper;
 
 /**
  * Delete the following twig config to use ownClouds default templates
@@ -44,7 +46,7 @@ $this['TwigTemplateDirectory'] = __DIR__ . '/../templates';
  */
 $this['ApiController'] = $this->share(function($c){
 	return new ApiController($c['API'], $c['Request'],
-		$c['TrackBusinessLayer'], $c['ArtistBusinessLayer']);
+		$c['TrackBusinessLayer'], $c['ArtistBusinessLayer'], $c['AlbumBusinessLayer']);
 });
 
 $this['PageController'] = $this->share(function($c){
@@ -65,4 +67,12 @@ $this['ArtistMapper'] = $this->share(function($c){
 
 $this['ArtistBusinessLayer'] = $this->share(function($c){
 	return new ArtistBusinessLayer($c['ArtistMapper']);
+});
+
+$this['AlbumMapper'] = $this->share(function($c){
+	return new AlbumMapper($c['API']);
+});
+
+$this['AlbumBusinessLayer'] = $this->share(function($c){
+	return new AlbumBusinessLayer($c['AlbumMapper']);
 });

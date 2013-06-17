@@ -34,38 +34,17 @@ class ApiController extends Controller {
 
 	private $trackBusinessLayer;
 	private $artistBusinessLayer;
-
-	private $dummyArtists = array();
-	private $dummyAlbums = array();
-	private $dummyTracks = array();
+	private $albumBusinessLayer;
 
 	public function __construct(API $api, Request $request,
-		TrackBusinessLayer $trackbusinesslayer, ArtistBusinessLayer $artistbusinesslayer){
+		TrackBusinessLayer $trackbusinesslayer, ArtistBusinessLayer $artistbusinesslayer,
+		AlbumBusinessLayer $albumbusinesslayer){
 		parent::__construct($api, $request);
 		$this->trackBusinessLayer = $trackbusinesslayer;
 		$this->artistBusinessLayer = $artistbusinesslayer;
+		$this->albumBusinessLayer = $albumbusinesslayer;
 	}
 
-	private function createDummyAlbums(){
-		$album = new Album();
-		$album->setId(1);
-		$album->setUserId(3);
-		$album->setName('The album name');
-		$album->setImage('http://lorempixel.com/200/200/nightlife');
-		$this->dummyAlbums[$album->getId()] = $album->toApi();
-		$album = new Album();
-		$album->setId(2);
-		$album->setUserId(3);
-		$album->setName('The proper album name');
-		$album->setImage('http://lorempixel.com/200/200/people');
-		$this->dummyAlbums[$album->getId()] = $album->toApi();
-		$album = new Album();
-		$album->setId(3);
-		$album->setUserId(3);
-		$album->setName('The properer album name');
-		$album->setImage('http://lorempixel.com/200/200/people');
-		$this->dummyAlbums[$album->getId()] = $album->toApi();
-	}
 	/**
 	 * @CSRFExemption
 	 * @IsAdminExemption
@@ -98,8 +77,9 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function albums() {
-		$this->createDummyAlbums();
-		return $this->renderPlainJSON(array_values($this->dummyAlbums));
+		$userId = $this->api->getUserId();
+		$albums = $this->albumBusinessLayer->findAll($userId);
+		return $this->renderPlainJSON($albums);
 	}
 
 	/**
@@ -109,12 +89,10 @@ class ApiController extends Controller {
 	 * @Ajax
 	 */
 	public function album() {
+		$userId = $this->api->getUserId();
 		$albumId = $this->getIdFromSlug($this->params('albumIdOrSlug'));
-		$this->createDummyAlbums();
-		if(array_key_exists($albumId, $this->dummyAlbums))
-			return $this->renderPlainJSON($this->dummyAlbums[$albumId]);
-		else
-			return $this->renderPlainJSON(Array('error' => 'No such album'));
+		$album = $this->albumBusinessLayer->find($albumId, $userId);
+		return $this->renderPlainJSON($album);
 	}
 
 	/**

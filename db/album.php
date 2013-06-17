@@ -31,8 +31,8 @@ class Album extends Entity {
 
 	public $name;
 	public $year;
-	public $artistIds;
 	public $cover;
+	public $artistIds = array();
 
 	public function __construct(){
 		$this->addType('year', 'int');
