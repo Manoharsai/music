@@ -46,7 +46,7 @@ if(\OCP\App::isEnabled('appframework')){
 		'order' => 10,
 
 		// the route that will be shown on startup
-		'href' => $api->linkToRoute('music_artists'),
+		'href' => $api->linkToRoute('music_index'),
 
 		// the icon that will be shown in the navigation
 		// this file needs to exist in img/example.png
