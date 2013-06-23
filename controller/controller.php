@@ -40,11 +40,11 @@ class Controller extends BaseController {
 
 	/**
 	 * Shortcut for rendering a JSON response with just the data
-	 * @param array $data the PHP array that will be converted to JSON
-	 * empty by default
+	 * @param object $data the PHP object that will be converted to JSON
+	 * empty array by default
 	 * @return \OCA\AppFramework\Http\PlainJSONResponse containing the values
 	 */
-	public function renderPlainJSON(array $data=array()){
+	public function renderPlainJSON($data=array()){
 		$response = new JSONResponse();
 		$response->setData($data);
 

@@ -26,8 +26,9 @@ namespace OCA\Music\Controller;
 
 use \OCA\AppFramework\Core\API;
 use \OCA\AppFramework\Http\Request;
-use \OCA\Music\Db\Artist;
 use \OCA\Music\BusinessLayer\TrackBusinessLayer;
+use \OCA\Music\BusinessLayer\ArtistBusinessLayer;
+use \OCA\Music\BusinessLayer\AlbumBusinessLayer;
 
 
 class ApiController extends Controller {
