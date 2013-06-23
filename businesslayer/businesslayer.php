@@ -54,4 +54,13 @@ abstract class BusinessLayer {
 		}
 	}
 
+	/**
+	 * Finds all entities
+	 * @param string $userId the name of the user for security reasons
+	 * @return array the entities
+	 */
+	public function findAll($userId){
+		return $this->mapper->findAll($userId);
+	}
+
 }

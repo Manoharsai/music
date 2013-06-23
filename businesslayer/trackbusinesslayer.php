@@ -33,15 +33,6 @@ class TrackBusinessLayer extends BusinessLayer {
 	}
 
 	/**
-	 * Returns all tracks
-	 * @param string $userId the name of the user
-	 * @return array of tracks
-	 */
-	public function findAll($userId){
-		return $this->mapper->findAll($userId);
-	}
-
-	/**
 	 * Returns all tracks filtered by artist
 	 * @param string $artistId the id of the artist
 	 * @param string $userId the name of the user
@@ -59,15 +50,5 @@ class TrackBusinessLayer extends BusinessLayer {
 	 */
 	public function findAllByAlbum($albumId, $userId){
 		return $this->mapper->findAllByAlbum($albumId, $userId);
-	}
-
-	/**
-	 * Returns a track
-	 * @param string $id the id of the track
-	 * @param string $userId the name of the user
-	 * @return track
-	 */
-	public function find($id, $userId){
-		return $this->mapper->find($id, $userId);
 	}
 }

@@ -49,17 +49,4 @@ class AlbumBusinessLayer extends BusinessLayer {
 		}
 		return $albums;
 	}
-
-	/**
-	 * Returns a album
-	 * @param string $id the id of the album
-	 * @param string $userId the name of the user
-	 * @return album
-	 */
-	public function find($id, $userId){
-		$album = $this->mapper->find($id, $userId);
-		$albumArtists = $this->mapper->getAlbumArtistsByAlbumId(array($album->getId()));
-		$album->setArtistIds($albumArtists[$album->getId()]);
-		return $album;
-	}
 }

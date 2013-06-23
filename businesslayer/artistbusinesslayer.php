@@ -31,23 +31,4 @@ class ArtistBusinessLayer extends BusinessLayer {
 	public function __construct(ArtistMapper $artistMapper){
 		parent::__construct($artistMapper);
 	}
-
-	/**
-	 * Returns all artists
-	 * @param string $userId the name of the user
-	 * @return array of artists
-	 */
-	public function findAll($userId){
-		return $this->mapper->findAll($userId);
-	}
-
-	/**
-	 * Returns a artist
-	 * @param string $id the id of the artist
-	 * @param string $userId the name of the user
-	 * @return artist
-	 */
-	public function find($id, $userId){
-		return $this->mapper->find($id, $userId);
-	}
 }
