@@ -33,7 +33,7 @@ class AlbumMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 
 	private $userId = 'john';
 	private $id = 5;
-	private $row;
+	private $rows;
 
 	public function setUp()
 	{
@@ -47,13 +47,20 @@ class AlbumMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 		$album1->setYear(2013);
 		$album1->setCover('http://example.org');
 		$album1->resetUpdatedFields();
+		$album2 = new Album();
+		$album2->setName('Test name2');
+		$album2->setYear(2012);
+		$album2->setCover('http://example.org/1');
+		$album2->resetUpdatedFields();
 
 		$this->albums = array(
-			$album1
+			$album1,
+			$album2
 		);
 
-		$this->row = array(
+		$this->rows = array(
 			array('id' => $this->albums[0]->getId(), 'name' => 'Test name', 'year' => 2013, 'cover' => 'http://example.org'),
+			array('id' => $this->albums[1]->getId(), 'name' => 'Test name2', 'year' => 2012, 'cover' => 'http://example.org/1'),
 		);
 
 	}
@@ -68,8 +75,15 @@ class AlbumMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 
 	public function testFind(){
 		$sql = $this->makeSelectQuery('AND `album`.`id` = ?');
-		$this->setMapperResult($sql, array($this->userId, $this->id), $this->row);
+		$this->setMapperResult($sql, array($this->userId, $this->id), array($this->rows[0]));
 		$result = $this->mapper->find($this->id, $this->userId);
 		$this->assertEquals($this->albums[0], $result);
+	}
+
+	public function testFindAll(){
+		$sql = $this->makeSelectQuery();
+		$this->setMapperResult($sql, array($this->userId), $this->rows);
+		$result = $this->mapper->findAll($this->userId);
+		$this->assertEquals($this->albums, $result);
 	}
 }

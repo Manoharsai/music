@@ -33,7 +33,7 @@ class ArtistMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 
 	private $userId = 'john';
 	private $id = 5;
-	private $row;
+	private $rows;
 
 	public function setUp()
 	{
@@ -46,13 +46,19 @@ class ArtistMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 		$artist1->setName('Test name');
 		$artist1->setImage('http://example.org');
 		$artist1->resetUpdatedFields();
+		$artist2 = new Artist();
+		$artist2->setName('Test name2');
+		$artist2->setImage('http://example.org/1');
+		$artist2->resetUpdatedFields();
 
 		$this->artists = array(
-			$artist1
+			$artist1,
+			$artist2
 		);
 
-		$this->row = array(
+		$this->rows = array(
 			array('id' => $this->artists[0]->getId(), 'name' => 'Test name', 'image' => 'http://example.org'),
+			array('id' => $this->artists[1]->getId(), 'name' => 'Test name2', 'image' => 'http://example.org/1'),
 		);
 
 	}
@@ -66,8 +72,15 @@ class ArtistMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 
 	public function testFind(){
 		$sql = $this->makeSelectQuery('AND `artist`.`id` = ?');
-		$this->setMapperResult($sql, array($this->userId, $this->id), $this->row);
+		$this->setMapperResult($sql, array($this->userId, $this->id), array($this->rows[0]));
 		$result = $this->mapper->find($this->id, $this->userId);
 		$this->assertEquals($this->artists[0], $result);
+	}
+
+	public function testFindAll(){
+		$sql = $this->makeSelectQuery();
+		$this->setMapperResult($sql, array($this->userId), $this->rows);
+		$result = $this->mapper->findAll($this->userId);
+		$this->assertEquals($this->artists, $result);
 	}
 }
