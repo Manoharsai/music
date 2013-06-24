@@ -86,4 +86,26 @@ class AlbumMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 		$result = $this->mapper->findAll($this->userId);
 		$this->assertEquals($this->albums, $result);
 	}
+
+	public function testGetAlbumArtistsByAlbumId(){
+		$sql = 'SELECT DISTINCT * FROM `*PREFIX*music_album_artists` `artists`'.
+			' WHERE `artists`.`album_id` IN (?,?,?)';
+		$albumIds = array(1,2,3);
+		$rows = array(
+			array('album_id' => 1, 'artist_id' => 2),
+			array('album_id' => 1, 'artist_id' => 5),
+			array('album_id' => 2, 'artist_id' => 1),
+			array('album_id' => 2, 'artist_id' => 3),
+			array('album_id' => 2, 'artist_id' => 5),
+			array('album_id' => 3, 'artist_id' => 4)
+		);
+		$albumArtists = array(
+			1 => array(2,5),
+			2 => array(1,3,5),
+			3 => array(4)
+		);
+		$this->setMapperResult($sql, $albumIds, $rows);
+		$result = $this->mapper->getAlbumArtistsByAlbumId($albumIds);
+		$this->assertEquals($albumArtists, $result);
+	}
 }

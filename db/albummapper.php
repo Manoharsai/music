@@ -56,8 +56,9 @@ class AlbumMapper extends Mapper {
 		for($i = 0; $i < count($albumIds); $i++){
 			$questionMarks[] = '?';
 		}
-		$sql = 'SELECT DISTINCT * FROM `*PREFIX*music_album_artists` `artists` '.
-			'WHERE `artists`.`album_id` IN (' . implode(',', $questionMarks) . ')';
+		$sql = 'SELECT DISTINCT * FROM `*PREFIX*music_album_artists` `artists`'.
+			' WHERE `artists`.`album_id` IN (' . implode(',', $questionMarks) .
+			')';
 		$result = $this->execute($sql, $albumIds);
 		$artists = array();
 		while($row = $result->fetchRow()){

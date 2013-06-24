@@ -33,6 +33,8 @@ class TrackMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 
 	private $userId = 'john';
 	private $id = 5;
+	private $artistId = 15;
+	private $albumId = 7;
 	private $rows;
 
 	public function setUp()
@@ -79,6 +81,20 @@ class TrackMapperTest extends \OCA\AppFramework\Utility\MapperTestUtility {
 		$sql = $this->makeSelectQuery();
 		$this->setMapperResult($sql, array($this->userId), $this->rows);
 		$result = $this->mapper->findAll($this->userId);
+		$this->assertEquals($this->tracks, $result);
+	}
+
+	public function testFindAllByArtist(){
+		$sql = $this->makeSelectQuery('AND `track`.`artist_id` = ?');
+		$this->setMapperResult($sql, array($this->userId, $this->artistId), $this->rows);
+		$result = $this->mapper->findAllByArtist($this->artistId, $this->userId);
+		$this->assertEquals($this->tracks, $result);
+	}
+
+	public function testFindAllByAlbum(){
+		$sql = $this->makeSelectQuery('AND `track`.`album_id` = ?');
+		$this->setMapperResult($sql, array($this->userId, $this->albumId), $this->rows);
+		$result = $this->mapper->findAllByAlbum($this->albumId, $this->userId);
 		$this->assertEquals($this->tracks, $result);
 	}
 }

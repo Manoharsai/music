@@ -20,7 +20,7 @@ dist: clean
 test: javascript-tests unit-tests integration-tests acceptance-tests
 
 unit-tests:
-	phpunit tests/unit
+	phpunit --coverage-html coverage-html tests/unit
 
 
 integration-tests:
